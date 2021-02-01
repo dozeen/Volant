@@ -25,7 +25,7 @@
   //Siamo nella Stanza
   */
   //Definiamo la Directory che contiene tutte le stanze
-  $sdirectory = 'stanze/';
+  $sdirectory = '..stanze/';
   //Definiamo il nome del nostro SitoWEB (non dimenticate la /)
   $sito= 'http://dozeen.ns0.it/';
 
