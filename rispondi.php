@@ -73,10 +73,23 @@
   $contatore=++$contatore;        //Ecco proprio adesso arriva una nuova linea
   $nomef=$_GET["nomef"];
   $prefisso=$_GET["prefisso"];
-  $lunghezzafile=$_GET['lunghezzafile'];
+  $lunghezzav=$_GET['lunghezzav'];
+  $nometit=$_GET['nometit'];
   $size=$_GET['size'];
   if (isset($prefisso)){$nomef=$prefisso;} 
   if (empty($nomef)){$prefisso="Nome";}
+  //Audio
+  $myfile = fopen($sdirectory.$stanza, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
+  $swap = fgets($myfile);
+  $lunghezzaf = substr($swap, -50 , 50);
+  fclose($myfile);  
+  //echo  'var' .$lunghezzaf. '----' .$lunghezzav.' ' ;
+  if ($lunghezzaf !== $lunghezzav) { 
+  echo '<embed src="audio/Uaglio.mp3" type="audio/mp3" autostart="true" hidden="false">
+  <audio id="player" autoplay controls><source src="audio/Uaglio.mp3" ></audio>' ;
+  $lunghezzav = $lunghezzaf;   
+}
+
   //Diamo un nome casuale
   $aggiungi="<mark>  $scriviamo</mark><figcaption class=\"blockquote-footer\"> $nomef </figcaption><br>";
   // Aggiungiamo solo se la variabile $scriviamo viene inviata 
@@ -95,7 +108,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
   <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="57; URL='.$sito.'Volant/rispondi.php?chiave='.$stanza.'&prefisso='.$prefisso.'" />
+  <meta http-equiv="refresh" content="57; URL='.$sito.'Volant/rispondi.php?chiave='.$stanza.'&prefisso='.$prefisso.'&lunghezzav='.$lunghezzav.'" />
   <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <title>(' .$contatore. ")" .$nometit. '  </title>
@@ -104,11 +117,12 @@
   <body>
   <div class="mx-auto" style="width: 200px;">
   ';
+  
+  //Leggiamo il contenuto della stanza
   $myfile = fopen($sdirectory.$stanza, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
   echo fgets($myfile);
   fclose($myfile);
-  
-  
+
   //adesso svuotiamo la stanza e la marchiamo ^_^ se inseriamo piu di 3 righe di continuo
   if ( $contatore > "2") {
     $contatore = '0';
@@ -116,17 +130,16 @@
     fwrite($chiave, "^_^_^_^_^_^_^_^_^_^_^_^");
     fclose($chiave);
     //abbiamo cancellato il contenuto della stanza , si riparte.
-    
   }
+ 
+  
   // Rispondiamo?
   echo '
-  
   <form action="rispondi.php">
   <input type="hidden" id="chiave" name="chiave" value="'.$stanza.'">
   <input type="hidden" id="contatore" name="contatore" value="'.$contatore.'"><br>
   <input type="hidden" id="nomef" name="nomef" value="'.$nomef.'">
   <input type="hidden" id="size" name="size" value="'.$size.'">
-  <input type="hidden" id="lunghezzafile" name="lunghezzafile" value="'.$lunghezzafile.'">
   <input type="text" id="scriviamo" name="scriviamo"  placeholder="TAB Scrivi e Enter" ><br>
   <input type="text" id="prefisso" name="prefisso" label="Prefisso" placeholder='.$nomef.' >
   <input type="hidden" id="chiave" name="chiave" value="'.$stanza.'"><br>
