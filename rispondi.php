@@ -81,11 +81,13 @@
   $swap = fgets($myfile);
   $lunghezzaf = strlen($swap);
   fclose($myfile);  
-echo "var $lunghezzav --- $lunghezzaf ";
+//echo "var $lunghezzav --- $lunghezzaf ";
   if ($lunghezzaf != $lunghezzav) { 
-  echo '<audio id="player" autoplay controls>
-  <source src="audio/wee.mp3" >
-  </audio>' ;
+  echo '<audio controls autoplay style="display:none">
+  <source src="audio/wee.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+' ;
   $lunghezzav = $lunghezzaf;  
 }
 //Diamo un nome casuale
@@ -95,6 +97,7 @@ echo "var $lunghezzav --- $lunghezzaf ";
   $costruttore = fopen($sdirectory.$stanza, "a+") or die("Temporaneamente non Disponibile!");
   fwrite($costruttore, $aggiungi);
   fclose($costruttore);
+  $lunghezzav = $lunghezzaf;  
   }
   $myfile = fopen($sdirectory.$stanza, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
   $swap =  fgets($myfile);
@@ -119,7 +122,7 @@ echo "var $lunghezzav --- $lunghezzaf ";
   echo fgets($myfile);
   fclose($myfile);
   //adesso svuotiamo la stanza e la marchiamo ^_^ se inseriamo piu di 3 righe di continuo
-  if ( $contatore > "5") {
+  if ( $contatore > "3") {
     $contatore = '0';
     $chiave = fopen($sdirectory.$chiave, "w") or die("Temporaneamente non Disponibile!");
     fwrite($chiave, "^_^_^_^_^_^_^_^_^_^_^_^_");
