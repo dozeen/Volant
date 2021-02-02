@@ -28,7 +28,6 @@
   $sdirectory = '../stanze/'; //la iseriamo al di fuori del reposity
   //Definiamo il nome del nostro SitoWEB (non dimenticate la /)
   $sito= 'http://dozeen.ns0.it/';
-
   //Generiamo una variabile con delle lettere casuali, ci servira` pre creare il nome delle stanze 
   function generatePassword($length)
   {
@@ -52,7 +51,6 @@
   return $pass_random;
   }
   $password=generatePassword(8);
-
   //Prendiamo i dati 
   $fbclid=$_GET["fbclid"];  // Facebook? interessante 
   $scriviamo=$_GET["scriviamo"];  // Messaggio da inserire nella stanza
@@ -81,16 +79,16 @@
   //Audio
   $myfile = fopen($sdirectory.$stanza, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
   $swap = fgets($myfile);
-  $lunghezzaf = substr($swap, -50 , 50);
+  $lunghezzaf = strlen($swap);
   fclose($myfile);  
-  //echo  'var' .$lunghezzaf. '----' .$lunghezzav.' ' ;
-  if ($lunghezzaf !== $lunghezzav) { 
-  echo '<embed src="audio/Uaglio.mp3" type="audio/mp3" autostart="true" hidden="false">
-  <audio id="player" autoplay controls><source src="audio/Uaglio.mp3" ></audio>' ;
-  $lunghezzav = $lunghezzaf;   
+//echo "var $lunghezzav --- $lunghezzaf ";
+  if ($lunghezzaf != $lunghezzav) { 
+  echo '<audio id="player" autoplay controls>
+  <source src="audio/Uaglio.mp3" >
+  </audio>' ;
+  $lunghezzav = $lunghezzaf;  
 }
-
-  //Diamo un nome casuale
+//Diamo un nome casuale
   $aggiungi="<mark>  $scriviamo</mark><figcaption class=\"blockquote-footer\"> $nomef </figcaption><br>";
   // Aggiungiamo solo se la variabile $scriviamo viene inviata 
   if (is_string($scriviamo))  {
@@ -102,13 +100,12 @@
   $swap =  fgets($myfile);
   $nometit = substr($swap, -27 , 10); // Che scriviamo nel titolo?
   fclose($myfile);
-  
   echo '
   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
   <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="57; URL='.$sito.'Volant/rispondi.php?chiave='.$stanza.'&prefisso='.$prefisso.'&lunghezzav='.$lunghezzav.'" />
+  <meta http-equiv="refresh" content="6; URL='.$sito.'Volant/rispondi.php?chiave='.$stanza.'&prefisso='.$prefisso.'&lunghezzav='.$lunghezzav.'" />
   <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <title>(' .$contatore. ")" .$nometit. '  </title>
@@ -117,23 +114,19 @@
   <body>
   <div class="mx-auto" style="width: 200px;">
   ';
-  
   //Leggiamo il contenuto della stanza
   $myfile = fopen($sdirectory.$stanza, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
   echo fgets($myfile);
   fclose($myfile);
-
   //adesso svuotiamo la stanza e la marchiamo ^_^ se inseriamo piu di 3 righe di continuo
   if ( $contatore > "2") {
     $contatore = '0';
     $chiave = fopen($sdirectory.$chiave, "w") or die("Temporaneamente non Disponibile!");
     fwrite($chiave, "^_^_^_^_^_^_^_^_^_^_^_^");
     fclose($chiave);
-    //abbiamo cancellato il contenuto della stanza , si riparte.
+   //abbiamo cancellato il contenuto della stanza , si riparte.
   }
- 
-  
-  // Rispondiamo?
+   // Rispondiamo?
   echo '
   <form action="rispondi.php">
   <input type="hidden" id="chiave" name="chiave" value="'.$stanza.'">
