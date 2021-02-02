@@ -81,10 +81,10 @@
   $swap = fgets($myfile);
   $lunghezzaf = strlen($swap);
   fclose($myfile);  
-//echo "var $lunghezzav --- $lunghezzaf ";
+echo "var $lunghezzav --- $lunghezzaf ";
   if ($lunghezzaf != $lunghezzav) { 
   echo '<audio id="player" autoplay controls>
-  <source src="audio/Uaglio.mp3" >
+  <source src="audio/wee.mp3" >
   </audio>' ;
   $lunghezzav = $lunghezzaf;  
 }
@@ -119,10 +119,10 @@
   echo fgets($myfile);
   fclose($myfile);
   //adesso svuotiamo la stanza e la marchiamo ^_^ se inseriamo piu di 3 righe di continuo
-  if ( $contatore > "2") {
+  if ( $contatore > "5") {
     $contatore = '0';
     $chiave = fopen($sdirectory.$chiave, "w") or die("Temporaneamente non Disponibile!");
-    fwrite($chiave, "^_^_^_^_^_^_^_^_^_^_^_^");
+    fwrite($chiave, "^_^_^_^_^_^_^_^_^_^_^_^_");
     fclose($chiave);
    //abbiamo cancellato il contenuto della stanza , si riparte.
   }
