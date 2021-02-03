@@ -79,9 +79,12 @@
   $lunghezzav=$_GET['lunghezzav'];
   $nometit=$_GET['nometit'];
   $size=$_GET['size'];
-  if (isset($prefisso)){$nomef=$prefisso;} 
-  if (empty($nomef)){$prefisso="Nome";}
-  //Audio
+  if (!empty($prefisso)){$nomef=$prefisso;}
+  if (empty($nomef)){
+    $nomef=$_SERVER['REMOTE_ADDR'];
+  }
+
+//Audio
   $myfile = fopen($sdirectory.$stanza, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
   $swap = fgets($myfile);
   $lunghezzaf = strlen($swap);
@@ -102,6 +105,11 @@
   $costruttore = fopen($sdirectory.$stanza, "a+") or die("Temporaneamente non Disponibile!");
   fwrite($costruttore, $aggiungi);
   fclose($costruttore);
+  //Quanto e lungo il file? $lunghezzav
+  $myfile = fopen($sdirectory.$stanza, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
+  $swap = fgets($myfile);
+  $lunghezzaf = strlen($swap);
+  fclose($myfile);  
   $lunghezzav = $lunghezzaf;  
   }
   $myfile = fopen($sdirectory.$stanza, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
@@ -130,7 +138,7 @@
   if ( $contatore > "3") {
     $contatore = '0';
     $chiave = fopen($sdirectory.$chiave, "w") or die("Temporaneamente non Disponibile!");
-    fwrite($chiave, "^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^");
+    fwrite($chiave, "^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^");
     fclose($chiave);
    //abbiamo cancellato il contenuto della stanza , si riparte.
   }
@@ -141,8 +149,9 @@
   <input type="hidden" id="contatore" name="contatore" value="'.$contatore.'"><br>
   <input type="hidden" id="nomef" name="nomef" value="'.$nomef.'">
   <input type="hidden" id="size" name="size" value="'.$size.'">
+  <input type="hidden" id="lunghezzav" name="lunghezzav" value="'.$lunghezzav.'">
   <input type="text" id="scriviamo" name="scriviamo"  placeholder="TAB Scrivi e Enter" ><br>
-  <input type="text" id="prefisso" name="prefisso" label="Prefisso" placeholder='.$nomef.' >
+  <input type="text" id="prefisso" name="prefisso" label="Prefisso" placeholder='.$prefisso.' >
   <input type="hidden" id="chiave" name="chiave" value="'.$stanza.'"><br>
   <button type="submit" class="btn btn-outline-secondary">Invia Messaggio</button>
   </form>
