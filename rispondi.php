@@ -63,7 +63,12 @@
             $myfile = fopen($sdirectory.$marchiofacebook, "a") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
     fclose($myfile);
           }
-    else { $chiave=$password;}
+    else {
+       $chiave=$password;
+       $costruttore = fopen($sdirectory.$chiave, "a+") or die("Temporaneamente non Disponibile!");
+  fwrite($costruttore, "Stanza Creata $chiave");
+  fclose($costruttore);
+    }
   }
   // Prendiamo PIPE
   $stanza=$chiave;
@@ -125,7 +130,7 @@
   if ( $contatore > "3") {
     $contatore = '0';
     $chiave = fopen($sdirectory.$chiave, "w") or die("Temporaneamente non Disponibile!");
-    fwrite($chiave, "^_^_^_^_^_^_^_^_^_^_^_^_");
+    fwrite($chiave, "^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^");
     fclose($chiave);
    //abbiamo cancellato il contenuto della stanza , si riparte.
   }
