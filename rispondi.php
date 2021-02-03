@@ -73,7 +73,6 @@
   // Prendiamo PIPE
   $stanza=$chiave;
   $contatore=$_GET["contatore"];  //Quante linee abbiamo inviato?
-  $contatore=++$contatore;        //Ecco proprio adesso arriva una nuova linea
   $nomef=$_GET["nomef"];
   $prefisso=$_GET["prefisso"];
   $lunghezzav=$_GET['lunghezzav'];
@@ -105,6 +104,7 @@
   $costruttore = fopen($sdirectory.$stanza, "a+") or die("Temporaneamente non Disponibile!");
   fwrite($costruttore, $aggiungi);
   fclose($costruttore);
+  $contatore=++$contatore;        //Ecco proprio adesso arriva una nuova linea
   //Quanto e lungo il file? $lunghezzav
   $myfile = fopen($sdirectory.$stanza, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
   $swap = fgets($myfile);
