@@ -1,4 +1,5 @@
 1 Download source da https://github.com/dozeen/Volant/releases 
 2 Estrai i file nella cartella del tuo sito web (es. /var/www/html)
-3 Aprite il Browser sul vostro sito Volant (es. http://dozeen.ns0.it/Volant)
+3 Create le cartelle ../stanze e ../immagini_caricate con privilegi di crittura
+4 Aprite il Browser sul vostro sito Volant (es. http://dozeen.ns0.it/Volant)
  Questa e` la via :-D
