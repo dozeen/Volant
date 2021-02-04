@@ -138,8 +138,10 @@
   </head>
   <body>
   <div class="mx-auto" style="width: auto;">
+  <div class="container">
+  <div class="container-fluid">
   ';
-  //Immagini_caricate
+  //Memorizzo Immagine della singola stanza in Immagini_caricate
 if (isset($_FILES['img'])){
    // inserisco il percorso dove verranno caricate le foto 
    $upload_percorso = '../immagini_caricate/';
@@ -163,7 +165,7 @@ if ( $contatore > "2") {
   $myfile = fopen($idirectory.$chiave, "w") or die("Temporaneamente non Disponibile!");
   fwrite($myfile, "-");
   fclose($myfile);
-}
+  }
 //abbiamo cancellato il contenuto della stanza , si riparte.
 
   //Leggiamo il contenuto della stanza
@@ -175,6 +177,7 @@ if ( $contatore > "2") {
  
   // FORM TAB ?
   echo '
+  </div>
   <form action="rispondi.php" method="post" >
   <input type="hidden" id="chiave" name="chiave" value="'.$chiave.'">
   <input type="hidden" id="contatore" name="contatore" value="'.$contatore.'"><br>
@@ -195,11 +198,11 @@ if ( $contatore > "2") {
   <input type="hidden" id="lunghezzav" name="lunghezzav" value="'.$lunghezzav.'">
   <input type="submit" name="carica" value="carica" />
   </form>
-
+</div>
 
 <br><br>
   
-<div class="row align-items-end">Indirizzo di QUESTA stanza
+<div class="container-fluid">Indirizzo di QUESTA stanza
   <input type="text"  value="'.$sito.'Volant/rispondi.php?chiave='.$stanza.'" id="myInput">
   <button onclick="myFunction()">Copia la Chiave </button>
   </div>
