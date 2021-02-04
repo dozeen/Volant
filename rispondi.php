@@ -24,10 +24,12 @@
 
   //Siamo nella Stanza
   */
-  //Definiamo la Directory che contiene tutte le stanze
-  $sdirectory = '../stanze/'; //la iseriamo al di fuori del reposity
+  //Definiamo i soliti parametri di configurazione
+  $sdirectory = '../stanze/'; //le iseriamo al di fuori del reposity
+  $idirectory = '../immagini_caricate/'; 
   //Definiamo il nome del nostro SitoWEB (non dimenticate la /)
   $sito= 'http://dozeen.ns0.it/';
+
   //Generiamo una variabile con delle lettere casuali, ci servira` pre creare il nome delle stanze 
   function generatePassword($length)
   {
@@ -69,7 +71,7 @@
     else {
        $chiave=$password;
        $costruttore = fopen($sdirectory.$chiave, "a+") or die("Temporaneamente non Disponibile!");
-  fwrite($costruttore, "Stanza Creata $chiave");
+  fwrite($costruttore, "^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^");
   fclose($costruttore);
     }
   }
@@ -82,7 +84,6 @@
   if (empty($prefisso)) {
     $prefisso=$_POST['prefisso'];
   }
-  $prefisso=$_POST["prefisso"];
   $lunghezzav=$_GET['lunghezzav'];
   $nometit=$_POST['nometit'];
   $size=$_POST['size'];
@@ -136,7 +137,7 @@
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   </head>
   <body>
-  <div class="mx-auto" style="width: 200px;">
+  <div class="mx-auto" style="width: auto;">
   ';
   //Immagini_caricate
 if (isset($_FILES['img'])){
@@ -150,21 +151,26 @@ if (isset($_FILES['img'])){
    move_uploaded_file($file_tmp, $upload_percorso.$file_nome);
   }
 
-echo '<img src="../immagini_caricate/'.$chiave.'" class="img-fluid" alt="stanza'.$chiave.'"> ' ; 
+echo '<img src="../immagini_caricate/'.$chiave.'" class="img-fluid" alt=""><br> ' ; 
 
+//adesso svuotiamo la stanza e la marchiamo ^_^ se inseriamo piu di 3 righe di continuo
+if ( $contatore > "2") {
+  $contatore = '0';
+  $myfile = fopen($sdirectory.$chiave, "w") or die("Temporaneamente non Disponibile!");
+  fwrite($myfile, "^_^_^_^_^_^_^_^_^_^_^_^_^<br>");
+  fclose($myfile);
+  //Cancelliamo anche l`immagine
+  $myfile = fopen($idirectory.$chiave, "w") or die("Temporaneamente non Disponibile!");
+  fwrite($myfile, "-");
+  fclose($myfile);
+}
+//abbiamo cancellato il contenuto della stanza , si riparte.
 
   //Leggiamo il contenuto della stanza
-  $myfile = fopen($sdirectory.$stanza, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
+  $myfile = fopen($sdirectory.$chiave, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
   echo fgets($myfile);
   fclose($myfile);
-  //adesso svuotiamo la stanza e la marchiamo ^_^ se inseriamo piu di 3 righe di continuo
-  if ( $contatore > "2") {
-    $contatore = '0';
-    $chiave = fopen($sdirectory.$chiave, "w") or die("Temporaneamente non Disponibile!");
-    fwrite($chiave, "^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^");
-    fclose($chiave);
-   //abbiamo cancellato il contenuto della stanza , si riparte.
-  }
+  
 
  
   // FORM TAB ?
