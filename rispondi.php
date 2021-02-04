@@ -130,7 +130,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
   <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="47; URL='.$sito.'Volant/rispondi.php?chiave='.$stanza.'&prefisso='.$prefisso.'&lunghezzav='.$lunghezzav.'" />
+  <meta http-equiv="refresh" content="37; URL='.$sito.'Volant/rispondi.php?chiave='.$stanza.'&prefisso='.$prefisso.'&lunghezzav='.$lunghezzav.'" />
   <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <title>(' .$contatore. ")" .$nometit. '  </title>
@@ -189,22 +189,21 @@ if ( $contatore > "2") {
   <button type="submit" class="btn btn-outline-secondary">Invia Messaggio</button>
   </form><br><br>
   <form action="rispondi.php"  method="post" enctype="multipart/form-data" name="upload_immagine">
-  Scegli immagine <input name="img" type="file" />
+  Scegli immagine <input class="btn btn-outline-secondary" name="img" type="file" />
   <input type="hidden" id="name" name="name" value="'.$stanza.'"><br>
   <input type="hidden" id="chiave" name="chiave" value="'.$chiave.'">
   <input type="hidden" id="contatore" name="contatore" value="'.$contatore.'">
   <input type="hidden" id="nomef" name="nomef" value="'.$nomef.'">
   <input type="hidden" id="size" name="size" value="'.$size.'">
   <input type="hidden" id="lunghezzav" name="lunghezzav" value="'.$lunghezzav.'">
-  <input type="submit" name="carica" value="carica" />
+  <input type="submit" class="btn btn-outline-secondary" name="carica" value="carica" />
   </form>
 </div>
 
 <br><br>
   
-<div class="container-fluid">Indirizzo di QUESTA stanza
-  <input type="text"  value="'.$sito.'Volant/rispondi.php?chiave='.$stanza.'" id="myInput">
-  <button onclick="myFunction()">Copia la Chiave </button>
+<div class="container-fluid"><input type="text"  size="1" value="'.$sito.'Volant/rispondi.php?chiave='.$stanza.'" id="myInput">
+  <button class="btn btn-outline-success" onclick="myFunction()">Copia la Chiave </button>
   </div>
   <script>
   function myFunction() {
