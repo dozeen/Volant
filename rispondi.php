@@ -30,6 +30,7 @@
   //Definiamo il nome del nostro SitoWEB (non dimenticate la /)
   $sito = 'http://dozeen.ns0.it/';
   $bodystyle = "#e6ded6";
+  $notifica = 'wee.mp3';
   //Generiamo una variabile con delle lettere casuali, ci servira` pre creare il nome delle stanze 
   function generatePassword($length)
   {
@@ -91,23 +92,26 @@
     $nomef=$_SERVER['REMOTE_ADDR'];
   }
  //Alert contatore >1
- if ($contatore > "1") { $bodystyle= "#d71313" ;}
-
+ if ($contatore > "1") { 
+   $bodystyle= "#d71313" ;
+  $notifica = 'Uaglio.mp3' ;
+  }
  
 //Audio
   $myfile = fopen($sdirectory.$stanza, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
   $swap = fgets($myfile);
   $lunghezzaf = strlen($swap);
   fclose($myfile);  
-//echo "var $lunghezzav --- $lunghezzaf ";
+
+  //echo "var $lunghezzav --- $lunghezzaf ";
   if ($lunghezzaf != $lunghezzav) { 
   echo '<audio controls autoplay style="display:none">
-  <source src="audio/wee.mp3" type="audio/mpeg">
+  <source src="audio/'.$notifica.'" type="audio/mpeg">
   Your browser does not support the audio element.
-</audio>
-' ;
+  </audio>' ;
   $lunghezzav = $lunghezzaf;  
 }
+
 //Diamo un nome casuale
   $aggiungi="<mark>  $scriviamo</mark><figcaption class=\"blockquote-footer\"> $nomef </figcaption><br>";
   // Aggiungiamo solo se la variabile $scriviamo viene inviata 
@@ -116,6 +120,7 @@
   fwrite($costruttore, $aggiungi);
   fclose($costruttore);
   $contatore=++$contatore;        //Ecco proprio adesso arriva una nuova linea
+  
   //Quanto e lungo il file? $lunghezzav
   $myfile = fopen($sdirectory.$stanza, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
   $swap = fgets($myfile);
