@@ -141,7 +141,7 @@
   //Immagini_caricate
 if (isset($_FILES['img'])){
    // inserisco il percorso dove verranno caricate le foto 
-   $upload_percorso = 'immagini_caricate/';
+   $upload_percorso = '../immagini_caricate/';
    // salvo il percorso temporaneo dell'immagine caricata 
    $file_tmp = $_FILES['img']['tmp_name'];
    // salvo il nome dell'immagine caricata 
@@ -150,7 +150,7 @@ if (isset($_FILES['img'])){
    move_uploaded_file($file_tmp, $upload_percorso.$file_nome);
   }
 
-echo '<img src="immagini_caricate/'.$chiave.'" class="img-fluid" alt="stanza'.$chiave.'"> ' ; 
+echo '<img src="../immagini_caricate/'.$chiave.'" class="img-fluid" alt="stanza'.$chiave.'"> ' ; 
 
 
   //Leggiamo il contenuto della stanza
