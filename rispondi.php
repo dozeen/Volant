@@ -28,8 +28,8 @@
   $sdirectory = '../stanze/'; //le iseriamo al di fuori del reposity
   $idirectory = '../immagini_caricate/'; 
   //Definiamo il nome del nostro SitoWEB (non dimenticate la /)
-  $sito= 'http://dozeen.ns0.it/';
-
+  $sito = 'http://dozeen.ns0.it/';
+  $bodystyle = "#e6ded6";
   //Generiamo una variabile con delle lettere casuali, ci servira` pre creare il nome delle stanze 
   function generatePassword($length)
   {
@@ -75,8 +75,7 @@
   fclose($costruttore);
     }
   }
- 
-  // Prendiamo PIPE
+   // Prendiamo PIPE
   $stanza=$chiave;
   $contatore=$_POST["contatore"];  //Quante linee abbiamo inviato?
   $nomef=$_POST["nomef"];
@@ -91,7 +90,10 @@
   if (empty($nomef)){
     $nomef=$_SERVER['REMOTE_ADDR'];
   }
+ //Alert contatore >1
+ if ($contatore > "1") { $bodystyle= "#d71313" ;}
 
+ 
 //Audio
   $myfile = fopen($sdirectory.$stanza, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
   $swap = fgets($myfile);
@@ -125,39 +127,9 @@
   $swap =  fgets($myfile);
   $nometit = substr($swap, -27 , 10); // Che scriviamo nel titolo?
   fclose($myfile);
-  echo '
-  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="37; URL='.$sito.'Volant/rispondi.php?chiave='.$stanza.'&prefisso='.$prefisso.'&lunghezzav='.$lunghezzav.'" />
-  <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <title>(' .$contatore. ")" .$nometit. '  </title>
-  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-  </head>
-  <body>
-  <div class="mx-auto" style="width: auto;">
-  <div class="container">
-  <div class="container-fluid">
-  ';
-  //Memorizzo Immagine della singola stanza in Immagini_caricate
-if (isset($_FILES['img'])){
-   // inserisco il percorso dove verranno caricate le foto 
-   $upload_percorso = '../immagini_caricate/';
-   // salvo il percorso temporaneo dell'immagine caricata 
-   $file_tmp = $_FILES['img']['tmp_name'];
-   // salvo il nome dell'immagine caricata 
-   $file_nome = $_POST['chiave'];
-   // sposto l'immagine nel percorso che prima abbiamo deciso 
-   move_uploaded_file($file_tmp, $upload_percorso.$file_nome);
-  }
-
-echo '<img src="../immagini_caricate/'.$chiave.'" class="img-fluid" alt=""><br> ' ; 
 
 //adesso svuotiamo la stanza e la marchiamo ^_^ se inseriamo piu di 3 righe di continuo
-if ( $contatore > "2") {
-  $contatore = '0';
+ if ( $contatore > "3") {
   $myfile = fopen($sdirectory.$chiave, "w") or die("Temporaneamente non Disponibile!");
   fwrite($myfile, "^_^_^_^_^_^_^_^_^_^_^_^_^<br>");
   fclose($myfile);
@@ -165,8 +137,43 @@ if ( $contatore > "2") {
   $myfile = fopen($idirectory.$chiave, "w") or die("Temporaneamente non Disponibile!");
   fwrite($myfile, "-");
   fclose($myfile);
+  $contatore = '0';
+  $bodystyle = "#e6ded6";
   }
 //abbiamo cancellato il contenuto della stanza , si riparte.
+
+//Memorizzo Immagine della singola stanza in Immagini_caricate
+  if (isset($_FILES['img'])){
+    // inserisco il percorso dove verranno caricate le foto 
+    $upload_percorso = '../immagini_caricate/';
+    // salvo il percorso temporaneo dell'immagine caricata 
+    $file_tmp = $_FILES['img']['tmp_name'];
+    // salvo il nome dell'immagine caricata 
+    $file_nome = $_POST['chiave'];
+    // sposto l'immagine nel percorso che prima abbiamo deciso 
+    move_uploaded_file($file_tmp, $upload_percorso.$file_nome);
+   }
+ 
+
+  echo '
+  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="37; URL='.$sito.'Volant/rispondi.php?chiave='.$stanza.'&prefisso='.$prefisso.'&lunghezzav='.$lunghezzav.'" />
+  <head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <title>(' .$contatore. ")" .$nometit. '  </title>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  </head>
+  <body style="background-color: '.$bodystyle.' ;>
+  <div class="container"  >
+  <div class="container-fluid">
+  ';
+
+
+echo '<img src="../immagini_caricate/'.$chiave.'" class="img-fluid" alt=""><br> ' ; 
+
 
   //Leggiamo il contenuto della stanza
   $myfile = fopen($sdirectory.$chiave, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
@@ -219,6 +226,9 @@ if ( $contatore > "2") {
   </pre>
   </div>
   </div>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   </body>
   </html>';
   ?> 
