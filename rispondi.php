@@ -53,13 +53,16 @@
   $password=generatePassword(8);
   //Prendiamo i dati 
   $fbclid=$_GET["fbclid"];  // Facebook? interessante 
-  $scriviamo=$_GET["scriviamo"];  // Messaggio da inserire nella stanza
+  $scriviamo=$_POST["scriviamo"];  // Messaggio da inserire nella stanza
   $marchiofacebook= substr($fbclid, -16); // prendiamo la coda del marchio di facebook
   // prendiamo la chiave
   $chiave=$_GET["chiave"];
+  if (empty($chiave)) {
+    $chiave=$_POST['chiave'];
+  }
   //Se la chiave e` vuota allora la assegnamo ad un valore, Facebook o casuale? CREIAMO STANZA
   if (empty($chiave)) {
-    if (isset($fbclid)){$chiave=$marchiofacebook;
+        if (isset($fbclid)){$chiave=$marchiofacebook;
             $myfile = fopen($sdirectory.$marchiofacebook, "a") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
     fclose($myfile);
           }
@@ -70,14 +73,19 @@
   fclose($costruttore);
     }
   }
+ 
   // Prendiamo PIPE
   $stanza=$chiave;
-  $contatore=$_GET["contatore"];  //Quante linee abbiamo inviato?
-  $nomef=$_GET["nomef"];
+  $contatore=$_POST["contatore"];  //Quante linee abbiamo inviato?
+  $nomef=$_POST["nomef"];
   $prefisso=$_GET["prefisso"];
+  if (empty($prefisso)) {
+    $prefisso=$_POST['prefisso'];
+  }
+  $prefisso=$_POST["prefisso"];
   $lunghezzav=$_GET['lunghezzav'];
-  $nometit=$_GET['nometit'];
-  $size=$_GET['size'];
+  $nometit=$_POST['nometit'];
+  $size=$_POST['size'];
   if (!empty($prefisso)){$nomef=$prefisso;}
   if (empty($nomef)){
     $nomef=$_SERVER['REMOTE_ADDR'];
@@ -121,7 +129,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
   <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="57; URL='.$sito.'Volant/rispondi.php?chiave='.$stanza.'&prefisso='.$prefisso.'&lunghezzav='.$lunghezzav.'" />
+  <meta http-equiv="refresh" content="47; URL='.$sito.'Volant/rispondi.php?chiave='.$stanza.'&prefisso='.$prefisso.'&lunghezzav='.$lunghezzav.'" />
   <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <title>(' .$contatore. ")" .$nometit. '  </title>
@@ -130,33 +138,62 @@
   <body>
   <div class="mx-auto" style="width: 200px;">
   ';
+  //Immagini_caricate
+if (isset($_FILES['img'])){
+   // inserisco il percorso dove verranno caricate le foto 
+   $upload_percorso = 'immagini_caricate/';
+   // salvo il percorso temporaneo dell'immagine caricata 
+   $file_tmp = $_FILES['img']['tmp_name'];
+   // salvo il nome dell'immagine caricata 
+   $file_nome = $_POST['chiave'];
+   // sposto l'immagine nel percorso che prima abbiamo deciso 
+   move_uploaded_file($file_tmp, $upload_percorso.$file_nome);
+  }
+
+echo '<img src="immagini_caricate/'.$chiave.'" class="img-fluid" alt="stanza'.$chiave.'"> ' ; 
+
+
   //Leggiamo il contenuto della stanza
   $myfile = fopen($sdirectory.$stanza, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
   echo fgets($myfile);
   fclose($myfile);
   //adesso svuotiamo la stanza e la marchiamo ^_^ se inseriamo piu di 3 righe di continuo
-  if ( $contatore > "3") {
+  if ( $contatore > "2") {
     $contatore = '0';
     $chiave = fopen($sdirectory.$chiave, "w") or die("Temporaneamente non Disponibile!");
     fwrite($chiave, "^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^");
     fclose($chiave);
    //abbiamo cancellato il contenuto della stanza , si riparte.
   }
-   // Rispondiamo?
+
+ 
+  // FORM TAB ?
   echo '
-  <form action="rispondi.php">
-  <input type="hidden" id="chiave" name="chiave" value="'.$stanza.'">
+  <form action="rispondi.php" method="post" >
+  <input type="hidden" id="chiave" name="chiave" value="'.$chiave.'">
   <input type="hidden" id="contatore" name="contatore" value="'.$contatore.'"><br>
   <input type="hidden" id="nomef" name="nomef" value="'.$nomef.'">
   <input type="hidden" id="size" name="size" value="'.$size.'">
   <input type="hidden" id="lunghezzav" name="lunghezzav" value="'.$lunghezzav.'">
-  <input type="text" id="scriviamo" name="scriviamo"  placeholder="TAB Scrivi e Enter" ><br>
-  <input type="text" id="prefisso" name="prefisso" label="Prefisso" placeholder='.$prefisso.' >
-  <input type="hidden" id="chiave" name="chiave" value="'.$stanza.'"><br>
+  <input type="text" id="scriviamo" name="scriviamo"  placeholder="TAB Scrivi e Enter"><br>
+  <input type="text" id="prefisso" name="prefisso"  placeholder="'.$nomef.'"    >
   <button type="submit" class="btn btn-outline-secondary">Invia Messaggio</button>
+  </form><br><br>
+  <form action="rispondi.php"  method="post" enctype="multipart/form-data" name="upload_immagine">
+  Scegli immagine <input name="img" type="file" />
+  <input type="hidden" id="name" name="name" value="'.$stanza.'"><br>
+  <input type="hidden" id="chiave" name="chiave" value="'.$chiave.'">
+  <input type="hidden" id="contatore" name="contatore" value="'.$contatore.'">
+  <input type="hidden" id="nomef" name="nomef" value="'.$nomef.'">
+  <input type="hidden" id="size" name="size" value="'.$size.'">
+  <input type="hidden" id="lunghezzav" name="lunghezzav" value="'.$lunghezzav.'">
+  <input type="submit" name="carica" value="carica" />
   </form>
-  <br><br>
-  <div class="row align-items-end">Indirizzo di QUESTA stanza
+
+
+<br><br>
+  
+<div class="row align-items-end">Indirizzo di QUESTA stanza
   <input type="text"  value="'.$sito.'Volant/rispondi.php?chiave='.$stanza.'" id="myInput">
   <button onclick="myFunction()">Copia la Chiave </button>
   </div>
