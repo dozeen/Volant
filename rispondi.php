@@ -107,7 +107,7 @@
   $lunghezzav = $lunghezzaf;  
 }
 
-//Diamo un nome casuale
+//Layout e Contenuti
   $aggiungi="<figure class=\"text-end\"><blockquote class=\"blockquote\"><p>  $scriviamo</blockquote><figcaption class=\"blockquote-footer\"> $nomef </figcaption><br>";
   // Aggiungiamo solo se la variabile $scriviamo viene inviata 
   if (is_string($scriviamo))  {
@@ -151,9 +151,9 @@
     $file_nome = $_POST['chiave'];
     // sposto l'immagine nel percorso che prima abbiamo deciso 
     move_uploaded_file($file_tmp, $upload_percorso.$file_nome);
+    $aggiorna = '1';
    }
- 
-
+//HTML
   echo '
   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -170,7 +170,7 @@
   <div class="container-fluid">
   ';
 
-
+  // Immagine
 echo '<img src="../immagini_caricate/'.$chiave.'" class="img-fluid" alt=""><br> ' ; 
 
 
@@ -178,12 +178,11 @@ echo '<img src="../immagini_caricate/'.$chiave.'" class="img-fluid" alt=""><br> 
   $myfile = fopen($sdirectory.$chiave, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
   echo fgets($myfile);
   fclose($myfile);
-  
 
- 
-  // FORM TAB ?
+  // FORM TAB 
   echo '
   </div>
+  <div class="container-fluid">
   <form action="rispondi.php" method="post" >
   <input type="hidden" id="chiave" name="chiave" value="'.$chiave.'">
   <input type="hidden" id="contatore" name="contatore" value="'.$contatore.'"><br>
@@ -193,7 +192,10 @@ echo '<img src="../immagini_caricate/'.$chiave.'" class="img-fluid" alt=""><br> 
   <input type="text" id="scriviamo" name="scriviamo"  placeholder="TAB Scrivi e Enter"><br>
   <input type="text" id="prefisso" name="prefisso"  placeholder="'.$nomef.'"    >
   <button type="submit" class="btn btn-outline-secondary">Invia Messaggio</button>
-  </form><br><br>
+  </form>
+  </div>
+  <br><br>
+  <div class="container-fluid">
   <form action="rispondi.php"  method="post" enctype="multipart/form-data" name="upload_immagine">
   Scegli immagine <input class="btn btn-outline-secondary" name="img" type="file" />
   <input type="hidden" id="name" name="name" value="'.$stanza.'"><br>
@@ -206,10 +208,9 @@ echo '<img src="../immagini_caricate/'.$chiave.'" class="img-fluid" alt=""><br> 
   </form>
 </div>
 <br><br>
-  
-<div class="container-fluid"><input type="text"  size="1" value="'.$sito.'Volant/rispondi.php?chiave='.$stanza.'" id="myInput">
+<div class="container-fluid">
+<input type="text"  size="1" value="'.$sito.'Volant/rispondi.php?chiave='.$stanza.'" id="myInput">
   <button class="btn btn-outline-success" onclick="myFunction()">Copia la Chiave </button>
-  </div>
   <script>
   function myFunction() {
   var copyText = document.getElementById("myInput");
