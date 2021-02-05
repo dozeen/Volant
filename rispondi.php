@@ -22,8 +22,10 @@
   //Definiamo il nome del nostro SitoWEB (non dimenticate la /)
   $sito = 'http://dozeen.ns0.it/';
   $bodystyle = "#e6ded6";
-  $aggiorna = "37";
-  $audioa = "wee.mp3"; 
+  $aggiorna = "57";
+  $avar = rand(1, 5); //Audio ma si divertiamoci
+  $audioa = "$avar.mp3";
+  //$audioa = "ngul.mp3"; //wee.mp3 Rspun.mp3 Aooo.mp3 ngul.mp3
   //Generiamo una variabile con delle lettere casuali, ci servira` pre creare il nome delle stanze 
   function generatePassword($length)
   {
@@ -86,17 +88,23 @@
   }
 
  //Alert contatore >1
- if ($contatore > "1") { 
+ if ($contatore > "0") { 
    $bodystyle= "#d71313" ;
-  $audioa = "Uaglio.mp3";
+   $audioa = "Cancella.mp3";
   $aggiorna = '3' ;
+  $lunghezzav = $lunghezzaf;
   }
+  if ($contatore > "1") { 
+    $audioa = "OkCanc.mp3";
+  $lunghezzav = $lunghezzaf;
+}
 
  //Audio
   $myfile = fopen($sdirectory.$stanza, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
   $swap = fgets($myfile);
   $lunghezzaf = strlen($swap);
   fclose($myfile);  
+
 //echo "var $lunghezzav --- $lunghezzaf ";
   if ($lunghezzaf != $lunghezzav) { 
   echo '<audio controls autoplay style="display:none">
@@ -127,20 +135,6 @@
   $nometit = substr($swap, -27 , 10); // Che scriviamo nel titolo?
   fclose($myfile);
 
-//adesso svuotiamo la stanza e la marchiamo ^_^ se inseriamo piu di 3 righe di continuo
- if ( $contatore > "3") {
-  $myfile = fopen($sdirectory.$chiave, "w") or die("Temporaneamente non Disponibile!");
-  fwrite($myfile, "^_^_^_^_^_^_^_^_^_^_^_^_^<br>");
-  fclose($myfile);
-  //Cancelliamo anche l`immagine
-  $myfile = fopen($idirectory.$chiave, "w") or die("Temporaneamente non Disponibile!");
-  fwrite($myfile, "-");
-  fclose($myfile);
-  $contatore = '0';
-  $bodystyle = "#e6ded6";
-  }
-//abbiamo cancellato il contenuto della stanza , si riparte.
-
 //Memorizzo Immagine della singola stanza in Immagini_caricate
   if (isset($_FILES['img'])){
     // inserisco il percorso dove verranno caricate le foto 
@@ -151,7 +145,7 @@
     $file_nome = $_POST['chiave'];
     // sposto l'immagine nel percorso che prima abbiamo deciso 
     move_uploaded_file($file_tmp, $upload_percorso.$file_nome);
-    $aggiorna = '1';
+    $aggiorna = '7';
    }
 //HTML
   echo '
@@ -178,6 +172,22 @@ echo '<img src="../immagini_caricate/'.$chiave.'" class="img-fluid" alt=""><br> 
   $myfile = fopen($sdirectory.$chiave, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
   echo fgets($myfile);
   fclose($myfile);
+
+  //adesso svuotiamo la stanza e la marchiamo ^_^ se inseriamo piu di 3 righe di continuo (meno di 7 secondi)
+if ( $contatore > "2") {
+  $myfile = fopen($sdirectory.$chiave, "w") or die("Temporaneamente non Disponibile!");
+  fwrite($myfile, "^_^_^_^_^_^_^_^_^_^_^_^_^<br>");
+  fclose($myfile);
+  //Cancelliamo anche l`immagine
+  $myfile = fopen($idirectory.$chiave, "w") or die("Temporaneamente non Disponibile!");
+  fwrite($myfile, "<br>");
+  fclose($myfile);
+  $contatore = '0';
+  $bodystyle = "#e6ded6";
+  $lunghezzav = $lunghezzaf;
+   }
+//abbiamo cancellato il contenuto della stanza , si riparte.
+
 
   // FORM TAB 
   echo '
@@ -228,4 +238,6 @@ echo '<img src="../immagini_caricate/'.$chiave.'" class="img-fluid" alt=""><br> 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
   </body>
   </html>';
+
+  
   ?> 
