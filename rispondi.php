@@ -1,27 +1,19 @@
   <?php
   /*
-
   rispondi.php
-
   Copyright 2021 pi <onofrio@dozeen.ns0.it>
-
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation; either version 2 of the License, or
   (at your option) any later version.
-
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
   GNU General Public License for more details.
-
   You should have received a copy of the GNU General Public License
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
   MA 02110-1301, USA.
-
-
-
   //Siamo nella Stanza
   */
   //Definiamo i soliti parametri di configurazione
@@ -30,8 +22,8 @@
   //Definiamo il nome del nostro SitoWEB (non dimenticate la /)
   $sito = 'http://dozeen.ns0.it/';
   $bodystyle = "#e6ded6";
-  $notifica = 'wee.mp3';
-  $aggiorniamo = "37";
+  $aggiorna = "37";
+  $audioa = "wee.mp3"; 
   //Generiamo una variabile con delle lettere casuali, ci servira` pre creare il nome delle stanze 
   function generatePassword($length)
   {
@@ -93,27 +85,27 @@
     $nomef=$_SERVER['REMOTE_ADDR'];
   }
  //Alert contatore >1
- if ($contatore > "2  ") { 
+ if ($contatore > "1") { 
    $bodystyle= "#d71313" ;
-  $notifica = 'Uaglio.mp3' ;
-  $aggiorniamo = '5' ;
+  $audioa = "Uaglio.mp3";
+  $aggiorna = '3' ;
   }
+
  
 //Audio
   $myfile = fopen($sdirectory.$stanza, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
   $swap = fgets($myfile);
   $lunghezzaf = strlen($swap);
   fclose($myfile);  
-
-  //echo "var $lunghezzav --- $lunghezzaf ";
+//echo "var $lunghezzav --- $lunghezzaf ";
   if ($lunghezzaf != $lunghezzav) { 
   echo '<audio controls autoplay style="display:none">
-  <source src="audio/'.$notifica.'" type="audio/mpeg">
+  <source src="audio/'.$audioa.'" type="audio/mpeg">
   Your browser does not support the audio element.
-  </audio>' ;
+</audio>
+' ;
   $lunghezzav = $lunghezzaf;  
 }
-
 //Diamo un nome casuale
   $aggiungi="<mark>  $scriviamo</mark><figcaption class=\"blockquote-footer\"> $nomef </figcaption><br>";
   // Aggiungiamo solo se la variabile $scriviamo viene inviata 
@@ -122,7 +114,6 @@
   fwrite($costruttore, $aggiungi);
   fclose($costruttore);
   $contatore=++$contatore;        //Ecco proprio adesso arriva una nuova linea
-  
   //Quanto e lungo il file? $lunghezzav
   $myfile = fopen($sdirectory.$stanza, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
   $swap = fgets($myfile);
@@ -135,21 +126,21 @@
   $nometit = substr($swap, -27 , 10); // Che scriviamo nel titolo?
   fclose($myfile);
 
-  //adesso svuotiamo la stanza e la marchiamo ^_^ se inseriamo piu di 3 righe di continuo
-  if ( $contatore > "3") {
+//adesso svuotiamo la stanza e la marchiamo ^_^ se inseriamo piu di 3 righe di continuo
+ if ( $contatore > "3") {
   $myfile = fopen($sdirectory.$chiave, "w") or die("Temporaneamente non Disponibile!");
   fwrite($myfile, "^_^_^_^_^_^_^_^_^_^_^_^_^<br>");
   fclose($myfile);
   //Cancelliamo anche l`immagine
   $myfile = fopen($idirectory.$chiave, "w") or die("Temporaneamente non Disponibile!");
-  fwrite($myfile, "");
+  fwrite($myfile, "-");
   fclose($myfile);
   $contatore = '0';
   $bodystyle = "#e6ded6";
   }
-  //abbiamo cancellato il contenuto della stanza , si riparte.
+//abbiamo cancellato il contenuto della stanza , si riparte.
 
-  //Memorizzo Immagine della singola stanza in Immagini_caricate
+//Memorizzo Immagine della singola stanza in Immagini_caricate
   if (isset($_FILES['img'])){
     // inserisco il percorso dove verranno caricate le foto 
     $upload_percorso = '../immagini_caricate/';
@@ -160,13 +151,14 @@
     // sposto l'immagine nel percorso che prima abbiamo deciso 
     move_uploaded_file($file_tmp, $upload_percorso.$file_nome);
    }
-   // HTML
+ 
+
   echo '
   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
   <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="'.$aggiorniamo.'"; URL='.$sito.'Volant/rispondi.php?chiave='.$stanza.'&prefisso='.$prefisso.'&lunghezzav='.$lunghezzav.'">
+  <meta http-equiv="refresh" content="'.$aggiorna.'; URL='.$sito.'Volant/rispondi.php?chiave='.$stanza.'&prefisso='.$prefisso.'&lunghezzav='.$lunghezzav.'" />
   <head>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <title>(' .$contatore. ")" .$nometit. '  </title>
@@ -212,7 +204,6 @@ echo '<img src="../immagini_caricate/'.$chiave.'" class="img-fluid" alt=""><br> 
   <input type="submit" class="btn btn-outline-secondary" name="carica" value="carica" />
   </form>
 </div>
-
 <br><br>
   
 <div class="container-fluid"><input type="text"  size="1" value="'.$sito.'Volant/rispondi.php?chiave='.$stanza.'" id="myInput">
