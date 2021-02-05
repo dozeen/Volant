@@ -84,6 +84,7 @@
   if (empty($nomef)){
     $nomef=$_SERVER['REMOTE_ADDR'];
   }
+
  //Alert contatore >1
  if ($contatore > "1") { 
    $bodystyle= "#d71313" ;
@@ -91,8 +92,7 @@
   $aggiorna = '3' ;
   }
 
- 
-//Audio
+ //Audio
   $myfile = fopen($sdirectory.$stanza, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
   $swap = fgets($myfile);
   $lunghezzaf = strlen($swap);
@@ -106,8 +106,9 @@
 ' ;
   $lunghezzav = $lunghezzaf;  
 }
+
 //Diamo un nome casuale
-  $aggiungi="<mark>  $scriviamo</mark><figcaption class=\"blockquote-footer\"> $nomef </figcaption><br>";
+  $aggiungi="<figure class=\"text-end\"><blockquote class=\"blockquote\"><p>  $scriviamo</blockquote><figcaption class=\"blockquote-footer\"> $nomef </figcaption><br>";
   // Aggiungiamo solo se la variabile $scriviamo viene inviata 
   if (is_string($scriviamo))  {
   $costruttore = fopen($sdirectory.$stanza, "a+") or die("Temporaneamente non Disponibile!");
@@ -160,12 +161,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="refresh" content="'.$aggiorna.'; URL='.$sito.'Volant/rispondi.php?chiave='.$stanza.'&prefisso='.$prefisso.'&lunghezzav='.$lunghezzav.'" />
   <head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   <title>(' .$contatore. ")" .$nometit. '  </title>
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   </head>
   <body style="background-color: '.$bodystyle.' ;>
-  <div class="container"  >
+  <div class="container">
   <div class="container-fluid">
   ';
 
@@ -223,9 +224,7 @@ echo '<img src="../immagini_caricate/'.$chiave.'" class="img-fluid" alt=""><br> 
   </pre>
   </div>
   </div>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
   </body>
   </html>';
   ?> 
