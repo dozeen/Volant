@@ -23,7 +23,7 @@
   $sito = 'http://dozeen.ns0.it/';
   $bodystyle = "#e6ded6";
   $aggiorna = "57";
-  $avar = rand(1, 5); //Audio ma si divertiamoci
+  $avar = rand(1, 10); //Audio ma si divertiamoci
   $audioa = "$avar.mp3";
   //$audioa = "ngul.mp3"; //wee.mp3 Rspun.mp3 Aooo.mp3 ngul.mp3
   //Generiamo una variabile con delle lettere casuali, ci servira` pre creare il nome delle stanze 
@@ -67,7 +67,7 @@
     else {
        $chiave=$password;
        $costruttore = fopen($sdirectory.$chiave, "a+") or die("Temporaneamente non Disponibile!");
-  fwrite($costruttore, "^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^_^");
+  fwrite($costruttore, "");
   fclose($costruttore);
     }
   }
@@ -81,7 +81,6 @@
   }
   $lunghezzav=$_GET['lunghezzav'];
   $nometit=$_POST['nometit'];
-  $size=$_POST['size'];
   if (!empty($prefisso)){$nomef=$prefisso;}
   if (empty($nomef)){
     $nomef=$_SERVER['REMOTE_ADDR'];
@@ -99,23 +98,23 @@
   $lunghezzav = $lunghezzaf;
 }
 
- //Audio
+  //Audio
   $myfile = fopen($sdirectory.$stanza, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
   $swap = fgets($myfile);
   $lunghezzaf = strlen($swap);
   fclose($myfile);  
 
-//echo "var $lunghezzav --- $lunghezzaf ";
+  //echo "var $lunghezzav --- $lunghezzaf ";
   if ($lunghezzaf != $lunghezzav) { 
   echo '<audio controls autoplay style="display:none">
   <source src="audio/'.$audioa.'" type="audio/mpeg">
   Your browser does not support the audio element.
-</audio>
-' ;
+  </audio>
+  ' ;
   $lunghezzav = $lunghezzaf;  
 }
 
-//Layout e Contenuti
+  //Layout e Contenuti
   $aggiungi="<figure class=\"text-end\"><blockquote class=\"blockquote\"><p>  $scriviamo</blockquote><figcaption class=\"blockquote-footer\"> $nomef </figcaption><br>";
   // Aggiungiamo solo se la variabile $scriviamo viene inviata 
   if (is_string($scriviamo))  {
@@ -130,13 +129,13 @@
   fclose($myfile);  
   $lunghezzav = $lunghezzaf;  
   }
-  $myfile = fopen($sdirectory.$stanza, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
-  $swap =  fgets($myfile);
-  $nometit = substr($swap, -27 , 10); // Che scriviamo nel titolo?
-  fclose($myfile);
+    $myfile = fopen($sdirectory.$stanza, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
+    $swap =  fgets($myfile);
+    $nometit = substr($swap, -27 , 10); // Che scriviamo nel titolo?
+    fclose($myfile);
 
-//Memorizzo Immagine della singola stanza in Immagini_caricate
-  if (isset($_FILES['img'])){
+    //Memorizzo Immagine della singola stanza in Immagini_caricate
+    if (isset($_FILES['img'])){
     // inserisco il percorso dove verranno caricate le foto 
     $upload_percorso = '../immagini_caricate/';
     // salvo il percorso temporaneo dell'immagine caricata 
@@ -145,6 +144,12 @@
     $file_nome = $_POST['chiave'];
     // sposto l'immagine nel percorso che prima abbiamo deciso 
     move_uploaded_file($file_tmp, $upload_percorso.$file_nome);
+
+   // Rimpicciolimento Immagini  
+    $thumb = new Imagick($upload_percorso.$file_nome);
+    $thumb->resizeImage(340,340,Imagick::FILTER_LANCZOS,1);
+    $thumb->writeImage($upload_percorso.$file_nome);
+   //  
     $aggiorna = '7';
    }
 //HTML
@@ -165,8 +170,7 @@
   ';
 
   // Immagine
-echo '<img src="../immagini_caricate/'.$chiave.'" class="img-fluid" alt=""><br> ' ; 
-
+  echo '<img src="../immagini_caricate/'.$chiave.'" class="rounded float-start" alt=""> ' ; 
 
   //Leggiamo il contenuto della stanza
   $myfile = fopen($sdirectory.$chiave, "r") or die('<H2><a href="'.$sito.'Volant/">Stanza Inesistente, Creane un`altra.</a></H2>');
@@ -174,9 +178,9 @@ echo '<img src="../immagini_caricate/'.$chiave.'" class="img-fluid" alt=""><br> 
   fclose($myfile);
 
   //adesso svuotiamo la stanza e la marchiamo ^_^ se inseriamo piu di 3 righe di continuo (meno di 7 secondi)
-if ( $contatore > "2") {
+  if ( $contatore > "2") {
   $myfile = fopen($sdirectory.$chiave, "w") or die("Temporaneamente non Disponibile!");
-  fwrite($myfile, "^_^_^_^_^_^_^_^_^_^_^_^_^<br>");
+  fwrite($myfile, "<br>");
   fclose($myfile);
   //Cancelliamo anche l`immagine
   $myfile = fopen($idirectory.$chiave, "w") or die("Temporaneamente non Disponibile!");
@@ -186,41 +190,37 @@ if ( $contatore > "2") {
   $bodystyle = "#e6ded6";
   $lunghezzav = $lunghezzaf;
    }
-//abbiamo cancellato il contenuto della stanza , si riparte.
-
+  //abbiamo cancellato il contenuto della stanza , si riparte.
 
   // FORM TAB 
   echo '
   </div>
-  <div class="container-fluid">
+  <div class="text-center">
   <form action="rispondi.php" method="post" >
   <input type="hidden" id="chiave" name="chiave" value="'.$chiave.'">
   <input type="hidden" id="contatore" name="contatore" value="'.$contatore.'"><br>
   <input type="hidden" id="nomef" name="nomef" value="'.$nomef.'">
-  <input type="hidden" id="size" name="size" value="'.$size.'">
-  <input type="hidden" id="lunghezzav" name="lunghezzav" value="'.$lunghezzav.'">
+    <input type="hidden" id="lunghezzav" name="lunghezzav" value="'.$lunghezzav.'">
   <input type="text" id="scriviamo" name="scriviamo"  placeholder="TAB Scrivi e Enter"><br>
-  <input type="text" id="prefisso" name="prefisso"  placeholder="'.$nomef.'"    >
+  <input type="text" id="prefisso" name="prefisso" size="7" placeholder="'.$nomef.'"    >
   <button type="submit" class="btn btn-outline-secondary">Invia Messaggio</button>
   </form>
   </div>
   <br><br>
-  <div class="container-fluid">
+  <div class="container-fluid" >
   <form action="rispondi.php"  method="post" enctype="multipart/form-data" name="upload_immagine">
-  Scegli immagine <input class="btn btn-outline-secondary" name="img" type="file" />
+  Scegli immagine <input class="btn btn-secondary btn-sm" class="d-grid gap-2 col-6 mx-auto" name="img" type="file" />
   <input type="hidden" id="name" name="name" value="'.$stanza.'"><br>
   <input type="hidden" id="chiave" name="chiave" value="'.$chiave.'">
   <input type="hidden" id="contatore" name="contatore" value="'.$contatore.'">
   <input type="hidden" id="nomef" name="nomef" value="'.$nomef.'">
-  <input type="hidden" id="size" name="size" value="'.$size.'">
   <input type="hidden" id="lunghezzav" name="lunghezzav" value="'.$lunghezzav.'">
-  <input type="submit" class="btn btn-outline-secondary" name="carica" value="carica" />
+  <input type="submit" class="btn btn-primary btn-sm"  name="carica" value="carica" />
   </form>
-</div>
-<br><br>
-<div class="container-fluid">
-<input type="text"  size="1" value="'.$sito.'Volant/rispondi.php?chiave='.$stanza.'" id="myInput">
-  <button class="btn btn-outline-success" onclick="myFunction()">Copia la Chiave </button>
+  </div>
+  <br><br>
+  <input type="text"  size="1" value="'.$sito.'Volant/rispondi.php?chiave='.$stanza.'" id="myInput">
+  <button class="btn btn-secondary btn-sm" onclick="myFunction()">Copia la Chiave </button>
   <script>
   function myFunction() {
   var copyText = document.getElementById("myInput");
@@ -234,10 +234,7 @@ if ( $contatore > "2") {
   <a href="'.$sito.'Volant/">Crea un`altra Stanza</a>
   </pre>
   </div>
-  </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
   </body>
   </html>';
-
-  
   ?> 
