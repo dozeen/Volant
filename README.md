@@ -1,4 +1,5 @@
 # Volant
+<img src="https://raw.githubusercontent.com/frjo/hugo-theme-zen/main/images/lighthouse_report.png" alt="Lighthouse report" style="max-width:100%;">
 
 DemoLive: <http://dozeen.ns0.it/Volant/index.html> (Crea la tua stanza e condividila con chi vuoi)
 
