@@ -23,7 +23,7 @@
   $sito = 'http://dozeen.ns0.it/';
   $bodystyle = "#e6ded6";
   $aggiorna = "57";
-  $avar = rand(0, 10); //Audio ma si divertiamoci
+  $avar = rand(0, 11); //Audio ma si divertiamoci
   $audioa = "$avar.mp3";
   //$audioa = "ngul.mp3"; //wee.mp3 Rspun.mp3 Aooo.mp3 ngul.mp3
   //Generiamo una variabile con delle lettere casuali, ci servira` pre creare il nome delle stanze 
