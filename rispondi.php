@@ -177,7 +177,7 @@
   ';
 
   // Immagine
-  echo '<img src="../immagini_caricate/' . $chiave . '" class="rounded float-start " alt=""> <figure class="text-center">
+  echo '<img src="../immagini_caricate/' . $chiave . '" c lass="rounded float-start " alt="Stanza Creata" <figure class="text-center">
   
   </div>';
 
