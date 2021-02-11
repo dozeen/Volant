@@ -19,13 +19,12 @@
   //Definiamo i soliti parametri di configurazione
   $sdirectory = '../stanze/'; //le iseriamo al di fuori del reposity
   $idirectory = '../immagini_caricate/';
-  //Definiamo il nome del nostro SitoWEB (non dimenticate la /)
+  //Definiamo l`indirizzo del nostro SitoWEB (non dimenticate la /)
   $sito = 'http://dozeen.ns0.it/';
   $bodystyle = "#e6ded6";
   $aggiorna = "57";
-  $avar = rand(20, 28); //Audio ma si divertiamoci
+  $avar = rand(20, 31); //Audio 20-28 RobertaSax
   $audioa = "$avar.mp3";
-  //$audioa = "ngul.mp3"; //wee.mp3 Rspun.mp3 Aooo.mp3 ngul.mp3
   //Generiamo una variabile con delle lettere casuali, ci servira` pre creare il nome delle stanze 
   function generatePassword($length)
   {
@@ -221,8 +220,7 @@
       Menu
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-      <li><a class="dropdown-item text-center" href="#"><form action="rispondi.php"  method="post" enctype="multipart/form-data" name="upload_immagine">
-      Cambia immagine <input class="btn btn-secondary btn-sm" class="d-grid gap-2 col-6 mx-auto" name="img" type="file" />
+      <li><a class="dropdown-item text-center" href="#"><form action="rispondi.php"  method="post" enctype="multipart/form-data" name="upload_immagine"><input name="img" type="file" />
       <input type="hidden" id="name" name="name" value="' . $stanza . '"><br>
       <input type="hidden" id="chiave" name="chiave" value="' . $chiave . '">
       <input type="hidden" id="contatore" name="contatore" value="' . $contatore . '">
