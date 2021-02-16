@@ -92,7 +92,7 @@
   if ($contatore > "0") {
     $bodystyle = "#d71313";
     $audioa = "Cancella.mp3";
-    $aggiorna = '3';
+    $aggiorna = '2';
     $lunghezzav = $lunghezzaf;
   }
   if ($contatore > "1") {
@@ -159,7 +159,7 @@
   <!doctype html>
   <html lang="en">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="' . $aggiorna . '; URL=' . $sito . 'Volant/rispondi.php?chiave=' . $stanza . '&prefisso=' . $prefisso . '&lunghezzav=' . $lunghezzav . '" />
+  <meta http-equiv="refresh" content="' . $aggiorna . '; URL=rispondi.php?chiave=' . $stanza . '&prefisso=' . $prefisso . '&lunghezzav=' . $lunghezzav . '" />
   <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
