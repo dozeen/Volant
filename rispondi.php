@@ -23,7 +23,7 @@
   $sito = 'http://dozeen.ns0.it/';
   $bodystyle = "#e6ded6";
   $aggiorna = "57";
-  $avar = rand(20, 31); //Audio 20-28 RobertaSax
+  $avar = rand(25, 31); //Audio 20-28 RobertaSax
   $audioa = "$avar.mp3";
   //Generiamo una variabile con delle lettere casuali, ci servira` pre creare il nome delle stanze 
   function generatePassword($length)
@@ -175,11 +175,39 @@
   <div class="container-fluid ">
   ';
 
-  // Immagine
-  echo '<img src="../immagini_caricate/' . $chiave . '" c lass="rounded float-start " alt="Stanza Creata" <figure class="text-center">
-  
-  </div>';
+  // se limmagine non esiste allora vuol dire che ha appena creato la stanza , mostramogli la chiave da condividere.
+  $indirizzo = "../immagini_caricate/$chiave";
+  $grandezza = filesize($indirizzo);
+  //echo "$indirizzo $grandezza" ;
+  if (empty($grandezza)){
+  echo '<img src="immagini/msgVolant.gif" class="rounded float-start " alt="Stanza Creata" <figure class="text-center"></div>';
+  echo '<input type="text"  size="1" value="' . $sito . 'Volant/rispondi.php?chiave=' . $stanza . '" id="myInput">
+  <button class="btn btn-danger btn-sm" onclick="myFunction()">Copia la Chiave</button>
+  <script>
+  function myFunction() {
+  var copyText = document.getElementById("myInput");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999)
+  document.execCommand("copy");
+  }
+  </script><img src="immagini/Chiave.gif"  alt="Copia la Chiave">
+<br>
+ <form action="rispondi.php"  method="post" enctype="multipart/form-data" name="upload_immagine"><input name="img"  class="btn btn-secondary btn-sm" type="file" />
+      <input type="hidden" id="name" name="name" value="' . $stanza . '"><br>
+      <input type="hidden" id="chiave" name="chiave" value="' . $chiave . '">
+      <input type="hidden" id="contatore" name="contatore" value="' . $contatore . '">
+      <input type="hidden" id="nomef" name="nomef" value="' . $nomef . '">
+      <input type="hidden" id="lunghezzav" name="lunghezzav" value="' . $lunghezzav . '">
+      <input type="submit" class="btn btn-primary btn-sm"  name="carica" value="Carica una Immagine" />
+      </form> </a>
+';
 
+
+}else {
+  echo '<img src="../immagini_caricate/' . $chiave . '" class="rounded float-start " alt="Stanza Creata" <figure class="text-center"></div>';
+  }
+  /*
+*/
   //Leggiamo il contenuto della stanza
   $myfile = fopen($sdirectory . $chiave, "r") or die('<H2><a href="' . $sito . 'Volant/rispondi.php?scriviamo=">Stanza Inesistente, Creane un`altra.</a></H2>');
   echo fgets($myfile);
@@ -220,13 +248,13 @@
       Menu
     </button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenuOffset">
-      <li><a class="dropdown-item text-center" href="#"><form action="rispondi.php"  method="post" enctype="multipart/form-data" name="upload_immagine"><input name="img" type="file" />
+      <li><a class="dropdown-item text-center" href="#"><form action="rispondi.php"  method="post" enctype="multipart/form-data" name="upload_immagine"><input name="img" class="btn btn-danger btn-sm" type="file" />
       <input type="hidden" id="name" name="name" value="' . $stanza . '"><br>
       <input type="hidden" id="chiave" name="chiave" value="' . $chiave . '">
       <input type="hidden" id="contatore" name="contatore" value="' . $contatore . '">
       <input type="hidden" id="nomef" name="nomef" value="' . $nomef . '">
       <input type="hidden" id="lunghezzav" name="lunghezzav" value="' . $lunghezzav . '">
-      <input type="submit" class="btn btn-primary btn-sm"  name="carica" value="carica" />
+      <input type="submit" class="btn btn-primary btn-sm"  name="carica" value="Carica una Immagine" />
       </form> </a></li>
       <li><a class="dropdown-item" href="#"><input type="text"  size="1" value="' . $sito . 'Volant/rispondi.php?chiave=' . $stanza . '" id="myInput">
       <button class="btn btn-secondary btn-sm" onclick="myFunction()">Copia la Chiave </button>
