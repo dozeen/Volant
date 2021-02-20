@@ -20,10 +20,10 @@
   $sdirectory = '../stanze/'; //le iseriamo al di fuori del reposity
   $idirectory = '../immagini_caricate/';
   //Definiamo l`indirizzo del nostro SitoWEB (non dimenticate la /)
-  $sito = 'http://dozeen.ns0.it/';
+  $sito = 'http://www.onofrio.homepc.it/';
   $bodystyle = "#e6ded6";
   $aggiorna = "57";
-  $avar = rand(25, 31); //Audio 20-28 RobertaSax
+  $avar = rand(77, 77); //Audio 20-28 RobertaSax
   $audioa = "$avar.mp3";
   //Generiamo una variabile con delle lettere casuali, ci servira` pre creare il nome delle stanze 
   function generatePassword($length)
@@ -91,12 +91,12 @@
   //Alert contatore >1
   if ($contatore > "0") {
     $bodystyle = "#d71313";
-    $audioa = "Cancella.mp3";
+    $audioa = "77.mp3";
     $aggiorna = '2';
     $lunghezzav = $lunghezzaf;
   }
   if ($contatore > "1") {
-    $audioa = "OkCanc.mp3";
+    $audioa = "78.mp3";
     $lunghezzav = $lunghezzaf;
   }
 
