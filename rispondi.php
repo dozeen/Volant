@@ -23,7 +23,7 @@
   $sito = 'http://www.onofrio.homepc.it/';
   $bodystyle = "#e6ded6";
   $aggiorna = "57";
-  $avar = rand(77, 77); //Audio 20-28 RobertaSax
+  $avar = rand(0, 77); //Audio 20-28 RobertaSax
   $audioa = "$avar.mp3";
   //Generiamo una variabile con delle lettere casuali, ci servira` pre creare il nome delle stanze 
   function generatePassword($length)
@@ -91,12 +91,12 @@
   //Alert contatore >1
   if ($contatore > "0") {
     $bodystyle = "#d71313";
-    $audioa = "77.mp3";
+    $audioa = "Cancella.mp3";
     $aggiorna = '2';
     $lunghezzav = $lunghezzaf;
   }
   if ($contatore > "1") {
-    $audioa = "78.mp3";
+    $audioa = "OkCanc.mp3";
     $lunghezzav = $lunghezzaf;
   }
 
@@ -143,15 +143,92 @@
     // salvo il percorso temporaneo dell'immagine caricata 
     $file_tmp = $_FILES['img']['tmp_name'];
     // salvo il nome dell'immagine caricata 
-    $file_nome = $_POST['chiave'];
+    $filename = $_POST['chiave'];
     // sposto l'immagine nel percorso che prima abbiamo deciso 
-    move_uploaded_file($file_tmp, $upload_percorso . $file_nome);
+    move_uploaded_file($file_tmp, $upload_percorso . $filename);
 
-    // Rimpicciolimento Immagini  
-    $thumb = new Imagick($upload_percorso . $file_nome);
-    $thumb->resizeImage(340, 340, Imagick::FILTER_LANCZOS, 1);
-    $thumb->writeImage($upload_percorso . $file_nome);
-    //  
+    class SimpleImage {
+
+      var $image;
+      var $image_type;
+   
+      function load($filename) {
+   
+         $image_info = getimagesize($filename);
+         $this->image_type = $image_info[2];
+         if( $this->image_type == IMAGETYPE_JPEG ) {
+   
+            $this->image = imagecreatefromjpeg($filename);
+         } elseif( $this->image_type == IMAGETYPE_GIF ) {
+   
+            $this->image = imagecreatefromgif($filename);
+         } elseif( $this->image_type == IMAGETYPE_PNG ) {
+   
+            $this->image = imagecreatefrompng($filename);
+         }
+      }
+      function save($filename, $image_type=IMAGETYPE_JPEG, $compression=75, $permissions=null) {
+   
+         if( $image_type == IMAGETYPE_JPEG ) {
+            imagejpeg($this->image,$filename,$compression);
+         } elseif( $image_type == IMAGETYPE_GIF ) {
+   
+            imagegif($this->image,$filename);
+         } elseif( $image_type == IMAGETYPE_PNG ) {
+   
+            imagepng($this->image,$filename);
+         }
+         if( $permissions != null) {
+   
+            chmod($filename,$permissions);
+         }
+      }
+      function output($image_type=IMAGETYPE_JPEG) {
+   
+         if( $image_type == IMAGETYPE_JPEG ) {
+            imagejpeg($this->image);
+         } elseif( $image_type == IMAGETYPE_GIF ) {
+   
+            imagegif($this->image);
+         } elseif( $image_type == IMAGETYPE_PNG ) {
+   
+            imagepng($this->image);
+         }
+      }
+      function getWidth() {
+   
+         return imagesx($this->image);
+      }
+      function getHeight() {
+   
+         return imagesy($this->image);
+      }
+      function resizeToHeight($height) {
+   
+         $ratio = $height / $this->getHeight();
+         $width = $this->getWidth() * $ratio;
+         $this->resize($width,$height);
+      }
+   
+      function resizeToWidth($width) {
+         $ratio = $width / $this->getWidth();
+         $height = $this->getheight() * $ratio;
+         $this->resize($width,$height);
+      }
+   
+      function scale($scale) {
+         $width = $this->getWidth() * $scale/10;
+         $height = $this->getheight() * $scale/10;
+         $this->resize($width,$height);
+      }
+   
+      function resize($width,$height) {
+         $new_image = imagecreatetruecolor($width, $height);
+         imagecopyresampled($new_image, $this->image, 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight());
+         $this->image = $new_image;
+      }      
+   
+   }  
     $aggiorna = '7';
   }
   //HTML
@@ -165,7 +242,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
   <title>(' . $contatore . ")" . $nometit . '  </title>
   <meta http-equiv="content-type" content="text/html;charset=utf-8" />
   </head>
@@ -204,7 +281,7 @@
 
 
 }else {
-  echo '<img src="../immagini_caricate/' . $chiave . '" class="rounded float-start " alt="Stanza Creata" <figure class="text-center"></div>';
+  echo '<img src="../immagini_caricate/' . $chiave . '" class="figure-img img-fluid rounded"  alt="Stanza Creata" <figure class="text-center"></div>';
   }
   /*
 */
@@ -275,8 +352,7 @@
   </pre>
   </div>
    </span>
-   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU" crossorigin="anonymous"></script>
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj" crossorigin="anonymous"></script>
-    </body>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+   </body>
   </html>';
   ?> 
