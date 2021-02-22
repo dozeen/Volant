@@ -217,8 +217,8 @@
       }
    
       function scale($scale) {
-         $width = $this->getWidth() * $scale/10;
-         $height = $this->getheight() * $scale/10;
+         $width = $this->getWidth() * $scale/100;
+         $height = $this->getheight() * $scale/100;
          $this->resize($width,$height);
       }
    
@@ -278,10 +278,8 @@
       <input type="submit" class="btn btn-primary btn-sm"  name="carica" value="Carica una Immagine" />
       </form> </a>
 ';
-
-
 }else {
-  echo '<img src="../immagini_caricate/' . $chiave . '" class="figure-img img-fluid rounded"  alt="Stanza Creata" <figure class="text-center"></div>';
+  echo '<img src="../immagini_caricate/' . $chiave . '" class="figure-img img-fluid rounded"  alt="Stanza Creata" width="320" </div>';
   }
   /*
 */
@@ -302,9 +300,9 @@
     $contatore = '0';
     $bodystyle = "#e6ded6";
     $lunghezzav = $lunghezzaf;
+    //abbiamo cancellato il contenuto della stanza , si riparte.
   }
-  //abbiamo cancellato il contenuto della stanza , si riparte.
-
+  
   // FORM TAB 
   echo '
   </figure>
@@ -355,4 +353,4 @@
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
    </body>
   </html>';
-  ?> 
+  ?>
