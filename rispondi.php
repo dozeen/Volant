@@ -23,7 +23,7 @@
   $sito = 'http://www.onofrio.homepc.it/';
   $bodystyle = "#e6ded6";
   $aggiorna = "57";
-  $avar = rand(0, 77); //Audio 20-28 RobertaSax
+  $avar = rand(0, 35); //Audio 20-28 RobertaSax
   $audioa = "$avar.mp3";
   //Generiamo una variabile con delle lettere casuali, ci servira` pre creare il nome delle stanze 
   function generatePassword($length)
@@ -51,11 +51,15 @@
   $password = generatePassword(8);
   //Prendiamo i dati 
   $fbclid = $_GET["fbclid"];  // Facebook? interessante 
-  $scriviamo = $_POST["scriviamo"];  // Messaggio da inserire nella stanza
-  $marchiofacebook = substr($fbclid, -16); // prendiamo la coda del marchio di facebook
+   // Scriviamo?
+   $scriviamo = $_GET["scriviamo"];
+   if (!isset($scriviamo)) {
+    $scriviamo = $_POST['scriviamo'];
+   }
+   $marchiofacebook = substr($fbclid, -16); // prendiamo la coda del marchio di facebook
   // prendiamo la chiave
   $chiave = $_GET["chiave"];
-  if (empty($chiave)) {
+  if (!isset($chiave)) {
     $chiave = $_POST['chiave'];
   }
   //Se la chiave e` vuota allora la assegnamo ad un valore, Facebook o casuale? CREIAMO STANZA
@@ -115,7 +119,6 @@
   ';
     $lunghezzav = $lunghezzaf;
   }
-
   //Layout e Contenuti
   $aggiungi = "<figure class=\"text-center\"><blockquote class=\"blockquote\"><p>  $scriviamo</blockquote><figcaption class=\"blockquote-footer\"> $nomef </figcaption><br>";
   // Aggiungiamo solo se la variabile $scriviamo viene inviata 
@@ -302,8 +305,7 @@
     $lunghezzav = $lunghezzaf;
     //abbiamo cancellato il contenuto della stanza , si riparte.
   }
-  
-  // FORM TAB 
+    // FORM TAB 
   echo '
   </figure>
   </div>
@@ -350,7 +352,8 @@
   </pre>
   </div>
    </span>
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
    </body>
-  </html>';
+  </html>
+ ';
   ?>
