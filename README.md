@@ -1,6 +1,6 @@
 # Volant WebChat Antritracciamento Autocancellante Veloce e Open Source
-<a href="http://dozeen.ns0.it/Volant/index.html"><img border="0" alt="Volant" src="http://dozeen.ns0.it/Volant/immagini/msgVolant.gif" alt="Volant Logo" style="max-width:100%;"></a>
-DemoLive: <http://dozeen.ns0.it/Volant/index.html>               
+<a href="https://www.onofrio.homepc.it/Volant/rispondi.php?scriviamo=GHospite"><img border="0" alt="Volant" src="http://dozeen.ns0.it/Volant/immagini/msgVolant.gif" alt="Volant Logo" style="max-width:100%;"></a>
+DemoLive: <https://www.onofrio.homepc.it/Volant/rispondi.php?scriviamo=GHospite>               
 (Crea la tua stanza e condividila con chi vuoi)
 
 Questo Programma ci tiene alla tua Privacy : NON USA COCKIE ( potete usarlo con qualsiasi dispositivo alla massima protezione di Privacy), NON USA LA VOSTRA E-MAIL, NON RACCOGLIE I VOSTRI DATI, NON VI TRACCIA e non e` possibile risalire alle vecchie chat come invece fa Messenger Instragram WhatzApp. Vi sembra poco? 
