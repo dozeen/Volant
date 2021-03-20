@@ -11,3 +11,6 @@ Questo Programma ci tiene alla tua Privacy : NON USA COCKIE ( potete usarlo con 
 ErrorDocument 404 http://dozeen.ns0.it/Volant/404.html
 
 -->
+
+Questo progetto non ha e non avra' mai Sponsor, se desideri aiutare economicamente puoi farlo e te ne saro` grato:
+https://www.onofrio.homepc.it/WordPress/index.php/donazione/
