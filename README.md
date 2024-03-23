@@ -17,6 +17,6 @@ https://dozeen.ns0.it/index.php/2024/03/22/donazione/
 [https://www.onofrio.homepc.it/WordPress/index.php/donazione/](https://www.onofrio.homepc.it/wordpress/donazione/)
 
 Per chi desidera utilizzarlo anche nel DARK WEB ( si consiglia TOR Browser ) :
-http://ufpmptnavmw5gu6gfvsvislggd3sp7vhgofyn2joczeeeelh2e24g7ad.onion/Volant/
+http://i2ru6yc7xfnexidj6aislvzshtcfridrmf6ussi4jtbulixaz3aujnid.onion/Volant/
 
 Buon Divertimento ;-)
