@@ -1,64 +1,45 @@
-<!--
-index.html
-Copyright 2021 pi <onofrio@dozeen.ns0.it>
-This program is free software; you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation; either version 2 of the License, or
-(at your option) any later version.
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
-MA 02110-1301, USA.
--->
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-  integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-
+<!DOCTYPE html>
+<html lang="it">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Volant - Messaggi auto cancellanti</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background-color: #e6ded6;">
 
-<body>
-  <title>Volant - Messaggi auto cancellanti -</title>
-  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column" style="background-color: #e6ded6 ;">
-    <header class="masthead mb-auto">
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
-          Menu
-        </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <li><button class="dropdown-item" type="button"><a class="nav-link active" href="http://dozeen.ns0.it/Volant/rispondi.php?scriviamo=">Crea una stanza</a></button></li>
-          <li><button class="dropdown-item" type="button"><a class="nav-link" href="http://dozeen.ns0.it/index.php/contattami/">Contact</a></button></li>
-          <li><button class="dropdown-item" type="button"><a class="nav-link" href="https://github.com/dozeen/Volant">github</a></button></li>
-          </ul>
-      </div>
-      <div class="inner">
-        <a href="http://dozeen.ns0.it/Volant/rispondi.php?chiave=IZLVEZozDN5gpK5E&prefisso=UtenteVolant&lunghezzav=207"><img src="immagini/msgVolant.gif" style="width:auto;"></a>
-      </div>
-    </header>
-    <main role="main" class="inner cover">
-      <form action="rispondi.php">
-        <input type="text" id="scriviamo" name="scriviamo" placeholder="Scrivi qui qualsiasi Messaggio"><br>
-        <button type="submit" class="btn btn-outline-secondary">Crea Stanza</button>
-      </form>
-    </main>
+  <!-- Header -->
+  <header class="d-flex justify-content-between align-items-center p-3">
+    <h1 class="h4">Volant</h1>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="menuDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        Menu
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="menuDropdown">
+        <li><a class="dropdown-item" href="rispondi.php?scriviamo=">Crea una stanza</a></li>
+        <li><a class="dropdown-item" href="http://www.dozeen.ns0.it/index.php/contattami/">Contattami</a></li>
+        <li><a class="dropdown-item" href="https://github.com/dozeen/Volant">GitHub</a></li>
+      </ul>
+    </div>
+  </header>
 
+  <!-- Main content -->
+  <main class="container text-center mt-5">
+    <a href="rispondi.php?chiave=IZLVEZozDN5gpK5E&prefisso=UtenteVolant&lunghezzav=207">
+      <img src="immagini/msgVolant.gif" class="img-fluid" alt="Messaggi Volant">
+    </a>
 
-  </div>
+    <form action="rispondi.php" method="get" class="d-flex flex-column align-items-center mt-4">
+      <input type="text" id="scriviamo" name="scriviamo" placeholder="Scrivi qui qualsiasi Messaggio" class="form-control mb-2" style="max-width: 400px;">
+      <button type="submit" class="btn btn-outline-secondary">Crea Stanza</button>
+    </form>
+  </main>
 
+  <!-- Footer -->
+  <footer class="text-center mt-auto py-3">
+    <p>Realizzato da Onofrio su Raspberry Linux</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-<footer class="mastfoot mt-auto">
-  <div class="inner">
-    <p>Realizzato da Onofrio su Raspberry linux <a href="http://dozeen.ns0.it/index.php/contattami/"></a></p>
-  </div>
-</footer>
-
 </html>
