@@ -1,23 +1,24 @@
-[![Demo Live](https://img.shields.io/badge/Live-Demo-brightgreen)](https://dozeen.ns0.it/Volant/)
+# Volant - Messaggi Auto Cancellanti
 
-Volant WebChat
+🌐 **Prova subito la demo live:** [https://dozeen.ns0.it/Volant/](https://dozeen.ns0.it/Volant/)
 
-Antitracciamento, Autocancellante, Veloce e Open Source
+Volant è una WebChat anti-tracciamento, autocancellante, veloce e open source.  
+Crea la tua stanza, scrivi i messaggi e condividila con chi vuoi, senza rischi per la privacy.
 
-Demo Live: Volant Demo
+---
 
-(Crea la tua stanza e condividila con chi vuoi)
+## Caratteristiche principali
+- Non usa cookie
+- Non raccoglie email o dati personali
+- Non traccia l’utente
+- Messaggi temporanei: le chat si autocancellano
 
-Privacy al primo posto
+---
 
-Questo programma rispetta la tua privacy:
+## Installazione e uso
+(…qui le istruzioni che avevi già…)
 
-Non usa cookie – puoi utilizzarlo con qualsiasi dispositivo alla massima protezione.
+---
 
-Non raccoglie e-mail o dati personali.
-
-Non ti traccia – non è possibile risalire alle vecchie chat, a differenza di Messenger, Instagram o WhatsApp.
-
-Ti sembra poco? 😉
-
-Buon Divertimento! 😉
+## Note sulla privacy
+Questo progetto non ha sponsor e rispetta la tua privacy al 100%.
