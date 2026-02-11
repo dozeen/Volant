@@ -1,5 +1,17 @@
+# runtime chat
 stanze/
+
+# log
 logs/
 *.log
+
+# env segreti
 .env
-audio/*.tmp
+
+# cache/temp
+*.tmp
+*.cache
+
+# sistema
+.DS_Store
+Thumbs.db
