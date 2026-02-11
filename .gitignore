@@ -1,0 +1,5 @@
+stanze/
+logs/
+*.log
+.env
+audio/*.tmp
